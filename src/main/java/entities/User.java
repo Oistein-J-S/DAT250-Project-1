@@ -20,7 +20,7 @@ public class User implements Serializable {
 	/**Class variables*/
 	//Create elements ids automatically, incremented 1 by 1
 	@TableGenerator(
-	name = "myTableGenerator",
+	name = "userTableGenerator",
 	allocationSize = 1,
 	initialValue = 1)
 	
@@ -31,7 +31,7 @@ public class User implements Serializable {
 	private String eMail;
 	private String name;
 	private String phone;
-	//private Product[] products;
+	private Product[] products;
 	//private Bid[] bids;
 	
 	/**Constructor*/
@@ -49,7 +49,13 @@ public class User implements Serializable {
 		return null;
 	}
 	
-	/**Helper methodes*/
+	public float getSellerRating() {
+		// TODO create method body
+		return 0;
+	};
+	
+	
+	/**Helper methods*/
 	private boolean isValidEMail(String eMail) {
 		// TODO create method body
 		return false;
