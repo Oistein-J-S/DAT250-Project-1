@@ -5,10 +5,8 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * Dat250
- *  
  * Persistent class for the User database table.
- * Class defining the main system user entity
+ * Class defining the main system user entity.
  */
 
 @Entity
@@ -20,53 +18,47 @@ public class User implements Serializable {
 	/**Class variables*/
 	//Create elements ids automatically, incremented 1 by 1
 	@TableGenerator(
-	name = "userTableGenerator",
+	name = "userTableGenerator", // TODO move to system class?
 	allocationSize = 1,
 	initialValue = 1)
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.TABLE,generator="yourTableGenerator")
+	@GeneratedValue(strategy=GenerationType.TABLE,generator="userTableGenerator") //TODO create reference to new system class
 	private int id;
 	
 	private String eMail;
 	private String name;
 	private String phone;
 	private Product[] products;
-	//private Bid[] bids;
+	private Bid[] bids;
 	
 	/**Constructor*/
-	public User() {};
+	public User() {}
 	public User(String eMail, String name, String phone) {
 		this.eMail = eMail;
 		this.name = name;
 		this.phone = phone;
-	};
-	
-	/**Class services*/
-	
-	//public String[] productReviews(Product ID) {
-	public String[] productReviews() {
-		return null;
 	}
 	
+	/**Class services*/
 	public float getSellerRating() {
 		// TODO create method body
 		return 0;
-	};
+	}
 	
 	
 	/**Helper methods*/
 	private boolean isValidEMail(String eMail) {
 		// TODO create method body
 		return false;
-	};
+	}
 	private boolean isValidName(String name) {
 		// TODO create method body
 		return false;
-	};
+	}
 	private boolean isValidPhone(String phone) {
 		// TODO create method body
 		return false;
-	};
+	}
 
 }
