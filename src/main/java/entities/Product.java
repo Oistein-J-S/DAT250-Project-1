@@ -15,17 +15,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @Table(name="product")
 public class Product implements Serializable {
-private static final long serialVersionUID = 1L; //Object version controll
-	
-	/**Class variables*/
-	//Create elements ids automatically, incremented 1 by 1
-	@TableGenerator(
-	name = "productTableGenerator", // TODO move to system class?
-	allocationSize = 1,
-	initialValue = 1)
+private static final long serialVersionUID = 1L; //Object version control
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.TABLE,generator="yourTableGenerator") //TODO create reference to new system class
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	
 	private String name;
@@ -56,6 +49,42 @@ private static final long serialVersionUID = 1L; //Object version controll
 		return null;
 	}
 	
-	/**Helper methods*/
-
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public String getFeatures() {
+		return features;
+	}
+	public void setFeatures(String features) {
+		this.features = features;
+	}
+	public String getPicture() {
+		return picture;
+	}
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	public ArrayList<Auction> getAuctions() {
+		return auctions;
+	}
+	public void setAuctions(ArrayList<Auction> auctions) {
+		this.auctions = auctions;
+	}
+	
 }
