@@ -13,39 +13,47 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @Table(name="bid")
 public class Bid implements Serializable {
-private static final long serialVersionUID = 1L; //Object version controll
-	
-	/**Class variables*/
-	//Create elements ids automatically, incremented 1 by 1
-	@TableGenerator(
-	name = "bidTableGenerator", // TODO move to system class?
-	allocationSize = 1,
-	initialValue = 1)
-	
+private static final long serialVersionUID = 1L; //Object version control
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.TABLE,generator="yourTableGenerator") //TODO create reference to new system class
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	
+	private Auction auction;
 	private User user;
 	private Double amount;
-	private Auction auction;
-	private Feedback feedback;
-	
-	/**Constructor*/
+
 	public Bid() {}
-	public Bid(User user, Double amount, Auction auction) {
+	
+	public Bid(Auction auction, User user, Double amount) {
+		super();
+		this.auction = auction;
 		this.user = user;
 		this.amount = amount;
-		this.auction = auction;
 	}
 
-	/**Class services*/
-	public void giveFeedback(String review, int productRating, int sellerRating) {
-		// TODO create method body
+	public User getUser() {
+		return user;
 	}
-	public void giveFeedback(Feedback feedback) {
-		this.feedback = feedback;
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Double getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Double amount) {
+		this.amount = amount;
+	}
+
+	public Auction getAuction() {
+		return auction;
+	}
+
+	public void setAuction(Auction auction) {
+		this.auction = auction;
 	}
 	
-	/**Helper methods*/
 }

@@ -15,26 +15,21 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Auction implements Serializable {
 private static final long serialVersionUID = 1L; //Object version controll
 	
-	/**Class variables*/
-	//Create elements ids automatically, incremented 1 by 1
-	@TableGenerator(
-	name = "auctionTableGenerator", // TODO move to system class?
-	allocationSize = 1,
-	initialValue = 1)
-	
 	@Id
-	@GeneratedValue(strategy=GenerationType.TABLE,generator="yourTableGenerator") //TODO create reference to new system class
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	
 	private Product product;
 	private Bid currentBid;
+	private Feedback feedback;
+	
 	private double startingPrice;
 	private double buyoutPrice;
 	private long startTime;
 	private long length;
 	
-	/**Constructor*/
 	public Auction() {}
+	
 	public Auction(Product product, double startingPrice, double buyoutPrice, long length) {
 		this.product = product;
 		this.startingPrice = startingPrice;
@@ -66,8 +61,61 @@ private static final long serialVersionUID = 1L; //Object version controll
 		// TODO create method body
 		return false;
 	}
-	
-	/**Helper methods*/
 
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
+	public Bid getCurrentBid() {
+		return currentBid;
+	}
+
+	public void setCurrentBid(Bid currentBid) {
+		this.currentBid = currentBid;
+	}
+
+	public Feedback getFeedback() {
+		return feedback;
+	}
+
+	public void setFeedback(Feedback feedback) {
+		this.feedback = feedback;
+	}
+
+	public double getStartingPrice() {
+		return startingPrice;
+	}
+
+	public void setStartingPrice(double startingPrice) {
+		this.startingPrice = startingPrice;
+	}
+
+	public double getBuyoutPrice() {
+		return buyoutPrice;
+	}
+
+	public void setBuyoutPrice(double buyoutPrice) {
+		this.buyoutPrice = buyoutPrice;
+	}
+
+	public long getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(long startTime) {
+		this.startTime = startTime;
+	}
+
+	public long getLength() {
+		return length;
+	}
+
+	public void setLength(long length) {
+		this.length = length;
+	}
 	
 }

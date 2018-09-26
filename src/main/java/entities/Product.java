@@ -1,6 +1,8 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -31,16 +33,20 @@ private static final long serialVersionUID = 1L; //Object version controll
 	private String features;
 	private String picture;
 	private User user;
-	private Auction[] auctions;
+	
+	@OneToMany
+	private ArrayList<Auction> auctions;
 	
 	/**Constructor*/
 	public Product() {}
 	public Product(String name, String description, String features, String picture, User user) {
 		this.name = name;
 		this.description = description;
-		this. features = features;
+		this.features = features;
 		this.picture = picture;
 		this.user = user;
+		
+		this.auctions = new ArrayList<Auction>();
 	}
 
 	/**Class services*/

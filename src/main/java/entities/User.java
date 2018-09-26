@@ -1,6 +1,8 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -13,29 +15,24 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @Table(name="user")
 public class User implements Serializable {
-	private static final long serialVersionUID = 1L; //Object version controll
-	
-	/**Class variables*/
-	//Create elements ids automatically, incremented 1 by 1
-	@TableGenerator(
-	name = "userTableGenerator", // TODO move to system class?
-	allocationSize = 1,
-	initialValue = 1)
+	private static final long serialVersionUID = 1L; //Object version control
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.TABLE,generator="userTableGenerator") //TODO create reference to new system class
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	
-	private String eMail;
+	private String email;
 	private String name;
 	private String phone;
-	private Product[] products;
-	private Bid[] bids;
 	
-	/**Constructor*/
+	private ArrayList<Product> products;
+	private ArrayList<Bid> bids;
+	
+	
 	public User() {}
-	public User(String eMail, String name, String phone) {
-		this.eMail = eMail;
+	
+	public User(String email, String name, String phone) {
+		this.email = email;
 		this.name = name;
 		this.phone = phone;
 	}
@@ -46,9 +43,8 @@ public class User implements Serializable {
 		return 0;
 	}
 	
-	
 	/**Helper methods*/
-	private boolean isValidEMail(String eMail) {
+	private boolean isValidEmail(String email) {
 		// TODO create method body
 		return false;
 	}
@@ -60,5 +56,38 @@ public class User implements Serializable {
 		// TODO create method body
 		return false;
 	}
-
+	
+	
+	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public ArrayList<Product> getProducts() {
+		return products;
+	}
+	public void setProducts(ArrayList<Product> products) {
+		this.products = products;
+	}
+	public ArrayList<Bid> getBids() {
+		return bids;
+	}
+	public void setBids(ArrayList<Bid> bids) {
+		this.bids = bids;
+	}
+	
 }

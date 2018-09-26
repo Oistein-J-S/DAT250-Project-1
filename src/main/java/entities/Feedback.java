@@ -13,36 +13,56 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @Table(name="bid")
 public class Feedback implements Serializable {
-private static final long serialVersionUID = 1L; //Object version controll
-	
-	/**Class variables*/
-	//Create elements ids automatically, incremented 1 by 1
-	@TableGenerator(
-	name = "feedbackTableGenerator", // TODO move to system class?
-	allocationSize = 1,
-	initialValue = 1)
-	
+private static final long serialVersionUID = 1L; //Object version control
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.TABLE,generator="yourTableGenerator") //TODO create reference to new system class
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	
 	private Bid bid;
-	private String feedback;
+	private String text;
 	private int sellerRating;
 	private int productRating;
-	
-	/**Constructor*/
+
 	public Feedback() {}
-	public Feedback(Bid bid, String feedback, int sRating, int pRating) {
+	
+	public Feedback(Bid bid, String text, int sRating, int pRating) {
 		this.bid = bid;
-		this.feedback = feedback;
+		this.text = text;
 		this.sellerRating = sRating;
 		this.productRating = pRating;
 	}
 
-	/**Class services*/
-	
-	
-	/**Helper methods*/
+	public Bid getBid() {
+		return bid;
+	}
+
+	public void setBid(Bid bid) {
+		this.bid = bid;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public int getSellerRating() {
+		return sellerRating;
+	}
+
+	public void setSellerRating(int sellerRating) {
+		this.sellerRating = sellerRating;
+	}
+
+	public int getProductRating() {
+		return productRating;
+	}
+
+	public void setProductRating(int productRating) {
+		this.productRating = productRating;
+	}
 
 }
