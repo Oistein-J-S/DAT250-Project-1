@@ -1,44 +1,57 @@
 package entities;
 
-import java.io.Serializable;
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * Persistent class for the User database table.
- * Class and system entity defining the act of making a review on a sold item.
+ * Persistent class for the User database table. Class and system entity
+ * defining the act of making a review on a sold item.
  */
 
 @Entity
-@XmlRootElement
-@Table(name="bid")
-public class Feedback implements Serializable {
-private static final long serialVersionUID = 1L; //Object version control
+public class Feedback {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+
+	@OneToOne(mappedBy = "feedback")
+	private Auction auction;
 	
-	private Bid bid;
+	@OneToOne
+	@JoinColumn(name = "user")
+	private User user;
+	
 	private String text;
 	private int sellerRating;
 	private int productRating;
 
-	public Feedback() {}
-	
-	public Feedback(Bid bid, String text, int sRating, int pRating) {
-		this.bid = bid;
+	public Feedback() {
+	}
+
+	public Feedback(Auction auction, User user, String text, int sellerRating, int productRating) {
+		super();
+		this.auction = auction;
+		this.user = user;
 		this.text = text;
-		this.sellerRating = sRating;
-		this.productRating = pRating;
+		this.sellerRating = sellerRating;
+		this.productRating = productRating;
 	}
 
-	public Bid getBid() {
-		return bid;
+
+	public Auction getAuction() {
+		return auction;
 	}
 
-	public void setBid(Bid bid) {
-		this.bid = bid;
+	public void setAuction(Auction auction) {
+		this.auction = auction;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public String getText() {

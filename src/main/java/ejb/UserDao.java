@@ -30,9 +30,6 @@ public class UserDao {
 	@JMSSessionMode(JMSContext.AUTO_ACKNOWLEDGE)
 	private JMSContext context;
 	
-//	@Resource(lookup = "jms/dat250/Topic")
-//	private Topic topic;
-	
 	
     public void persist(User user) throws NamingException, JMSException {
         em.persist(user);

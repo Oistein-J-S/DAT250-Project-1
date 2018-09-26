@@ -12,7 +12,7 @@ import entities.User;
 
 public class TweetTest {
 
-	private static final String PERSISTENCE_UNIT_NAME = "DAT250TweetAdvanced";
+	private static final String PERSISTENCE_UNIT_NAME = "DAT250AuctionApplication";
 	private static EntityManagerFactory factory;
 
 	public static void main(String[] args) {
