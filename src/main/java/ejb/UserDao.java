@@ -35,6 +35,10 @@ public class UserDao {
         em.persist(user);
         em.flush();
     }
+    
+    public User find(int id) {
+    	return em.find(User.class, id);
+    }
 
     // Retrieves all the users:
 	@SuppressWarnings("unchecked")

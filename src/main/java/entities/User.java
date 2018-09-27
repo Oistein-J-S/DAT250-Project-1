@@ -32,6 +32,9 @@ public class User {
 		this.email = email;
 		this.name = name;
 		this.phone = phone;
+		
+		this.products = new ArrayList<Product>();
+		this.bids = new ArrayList<Bid>();
 	}
 	
 	public Integer getId() {
