@@ -9,7 +9,8 @@ import javax.persistence.*;
 
 @Entity(name = "auction")
 public class Auction {
-
+	
+	/** Variables */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
@@ -29,6 +30,7 @@ public class Auction {
 	private Long startTime;
 	private Long length;
 
+	/** Constructor */
 	public Auction() {
 	}
 
@@ -47,7 +49,7 @@ public class Auction {
 		this.length = length;
 	}
 
-	/** Class services */
+	/** Data services */
 	public boolean isPublished() {
 		// TODO create method body
 		return false;
@@ -57,13 +59,6 @@ public class Auction {
 		// TODO create method body
 		return false;
 	};
-
-	// Method to acept bit to be verified as new currentBid
-	// Thread safety may an issue in this method?
-	public boolean makeBid(Bid bid) {
-		// TODO create method body
-		return false;
-	}
 	
 	public Integer getId() {
 		return id;

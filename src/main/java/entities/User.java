@@ -37,6 +37,7 @@ public class User {
 		this.bids = new ArrayList<Bid>();
 	}
 	
+	/** Data services */
 	public Integer getId() {
 		return id;
 	}

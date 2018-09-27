@@ -9,6 +9,10 @@ import javax.naming.NamingException;
 
 import entities.User;
 
+/**
+ * Singleton JE Bean creating and persisting a test dataset at application startup
+ */
+
 @Singleton
 @Startup
 public class Initialize {
