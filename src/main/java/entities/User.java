@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * user entity.
  */
 
-@Entity(name = "\"USER\"")
+@Entity(name = "\"user\"")
 public class User {
 	
 	/** Variables */

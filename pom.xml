@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.Dat250</groupId>
-	
+
 	<artifactId>auctionapplication</artifactId>
 	<packaging>war</packaging>
 	<version>1.0.0</version>
@@ -25,12 +25,12 @@
 			<scope>test</scope>
 		</dependency>
 		<!-- Derby dependency for the database -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.apache.derby</groupId>
 			<artifactId>derby</artifactId>
 			<version>10.12.1.1</version>
 			<scope>test</scope>
-		</dependency>
+		</dependency> -->
 		<!-- Contains all Java EE 7 APIs (from EJB, JTA, JCA over CDI to JPA) -->
 		<dependency>
 			<groupId>javax</groupId>
@@ -63,6 +63,12 @@
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
 			<version>2.8.5</version>
+		</dependency>
+		<!-- PostgreSQL -->
+		<dependency>
+			<groupId>postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>9.1-901-1.jdbc4</version>
 		</dependency>
 	</dependencies>
 	<build>
