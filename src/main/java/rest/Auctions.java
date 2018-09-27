@@ -52,9 +52,34 @@ public class Auctions {
 		
 		int idInt = Integer.parseInt(id);
 		Auction auction = em.find(Auction.class, idInt);
-	
-		return auction.getBids();
 		
+		if (auction != null) {
+			return auction.getBids();
+		} else {
+			return null;
+		}
+		
+	}
+	
+	@GET
+	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
+	@Path("{aid}/bids/{bid}")
+	public Bid auctionBid(@PathParam("aid") String aid, @PathParam("bid") String bid) {
+		
+		int auctionId = Integer.parseInt(aid);
+		int bidId = Integer.parseInt(bid);
+		
+		// when creating the query, treat the objects as java objects (i.e. bid.auction.id)
+		Query query = em.createQuery("SELECT b FROM bid b WHERE b.id = ?1 AND b.auction.id = ?2", Bid.class)
+				.setParameter(1, bidId)
+				.setParameter(2, auctionId);
+		
+		try {
+			return (Bid) query.getSingleResult();
+		} catch (Exception e) {
+			return null;
+		}
+
 	}
 	
 
@@ -76,7 +101,17 @@ public class Auctions {
 		
 		double amount = Double.parseDouble(amountString);
 		
+		if (auction == null || user == null) {
+			return null;
+		}
+		
 		Bid bid = new Bid(auction, user, amount);
+		
+		auction.getBids().add(bid);
+		em.persist(auction);
+		
+		user.getBids().add(bid);
+		em.persist(user);
 		
 		em.persist(bid);
 		
