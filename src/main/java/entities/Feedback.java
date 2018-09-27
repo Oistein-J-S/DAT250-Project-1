@@ -12,7 +12,7 @@ public class Feedback {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Integer id;
 
 	@OneToOne(mappedBy = "feedback")
 	private Auction auction;
@@ -22,11 +22,10 @@ public class Feedback {
 	private User user;
 	
 	private String text;
-	private int sellerRating;
-	private int productRating;
+	private Integer sellerRating;
+	private Integer productRating;
 
-	public Feedback() {
-	}
+	public Feedback() {}
 
 	public Feedback(Auction auction, User user, String text, int sellerRating, int productRating) {
 		super();
@@ -37,6 +36,13 @@ public class Feedback {
 		this.productRating = productRating;
 	}
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public Auction getAuction() {
 		return auction;
@@ -62,19 +68,19 @@ public class Feedback {
 		this.text = text;
 	}
 
-	public int getSellerRating() {
+	public Integer getSellerRating() {
 		return sellerRating;
 	}
 
-	public void setSellerRating(int sellerRating) {
+	public void setSellerRating(Integer sellerRating) {
 		this.sellerRating = sellerRating;
 	}
 
-	public int getProductRating() {
+	public Integer getProductRating() {
 		return productRating;
 	}
 
-	public void setProductRating(int productRating) {
+	public void setProductRating(Integer productRating) {
 		this.productRating = productRating;
 	}
 

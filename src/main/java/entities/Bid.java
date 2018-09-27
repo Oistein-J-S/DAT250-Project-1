@@ -12,7 +12,7 @@ public class Bid {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Integer id;
 
 	@OneToOne
 	@JoinColumn(name = "auction")
@@ -32,6 +32,14 @@ public class Bid {
 		this.auction = auction;
 		this.user = user;
 		this.amount = amount;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public User getUser() {

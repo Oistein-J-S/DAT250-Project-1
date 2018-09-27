@@ -33,6 +33,7 @@ public class UserDao {
 	
     public void persist(User user) throws NamingException, JMSException {
         em.persist(user);
+        em.flush();
     }
 
     // Retrieves all the users:

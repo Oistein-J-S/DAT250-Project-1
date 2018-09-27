@@ -14,7 +14,7 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Integer id;
 
 	private String email;
 	private String name;
@@ -26,13 +26,20 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	private ArrayList<Bid> bids;
 
-	public User() {
-	}
+	public User() {}
 
 	public User(String email, String name, String phone) {
 		this.email = email;
 		this.name = name;
 		this.phone = phone;
+	}
+	
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getEmail() {

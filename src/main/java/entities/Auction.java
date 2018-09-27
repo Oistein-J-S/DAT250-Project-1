@@ -12,7 +12,7 @@ public class Auction {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Integer id;
 
 	@ManyToOne
 	private Product product;
@@ -24,10 +24,10 @@ public class Auction {
 	@OneToOne
 	private Feedback feedback;
 
-	private double startingPrice;
-	private double buyoutPrice;
-	private long startTime;
-	private long length;
+	private Double startingPrice;
+	private Double buyoutPrice;
+	private Long startTime;
+	private Long length;
 
 	public Auction() {
 	}
@@ -63,6 +63,14 @@ public class Auction {
 	public boolean makeBid(Bid bid) {
 		// TODO create method body
 		return false;
+	}
+	
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public Product getProduct() {

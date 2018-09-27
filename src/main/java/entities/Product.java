@@ -14,7 +14,7 @@ public class Product {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Integer id;
 
 	private String name;
 	private String description;
@@ -41,12 +41,12 @@ public class Product {
 		this.auctions = new ArrayList<Auction>();
 	}
 
-	/** Class services */
-	// Method to collect and concatenate all reviews from all actions connected to
-	// the product.
-	public String[] productReviews() {
-		// TODO create method body
-		return null;
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getName() {
