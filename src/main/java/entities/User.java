@@ -1,8 +1,10 @@
 package entities;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * Persistent class for the User database table. Class defining the main system
@@ -22,10 +24,10 @@ public class User {
 	private String phone;
 
 	@OneToMany(mappedBy = "user")
-	private ArrayList<Product> products;
+	private List<Product> products;
 	
 	@OneToMany(mappedBy = "user")
-	private ArrayList<Bid> bids;
+	private List<Bid> bids;
 
 	/** Constructors */
 	public User() {}
@@ -38,6 +40,8 @@ public class User {
 		this.products = new ArrayList<Product>();
 		this.bids = new ArrayList<Bid>();
 	}
+	
+	
 	
 	/** Data services */
 	public Integer getId() {
@@ -72,19 +76,21 @@ public class User {
 		this.phone = phone;
 	}
 
-	public ArrayList<Product> getProducts() {
+	@XmlTransient
+	public List<Product> getProducts() {
 		return products;
 	}
 
-	public void setProducts(ArrayList<Product> products) {
+	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
 
-	public ArrayList<Bid> getBids() {
+	@XmlTransient
+	public List<Bid> getBids() {
 		return bids;
 	}
 
-	public void setBids(ArrayList<Bid> bids) {
+	public void setBids(List<Bid> bids) {
 		this.bids = bids;
 	}
 

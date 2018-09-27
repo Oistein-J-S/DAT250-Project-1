@@ -1,17 +1,22 @@
 package ejb;
 
-import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
-import javax.ejb.Singleton;
-import javax.ejb.Startup;
-import javax.jms.JMSException;
-import javax.naming.NamingException;
 import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import entities.*;
+import javax.annotation.PostConstruct;
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
+import javax.jms.JMSException;
+import javax.naming.NamingException;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import entities.Auction;
+import entities.Bid;
+import entities.Product;
+import entities.User;
 
 /**
  * Singleton JE Bean creating and persisting a test dataset at application startup
@@ -21,8 +26,8 @@ import entities.*;
 @Startup
 public class Initialize {
 	
-	@EJB
-	UserDao userDao;
+	@PersistenceContext(unitName="AuctionApplicationPU")
+	private EntityManager em;
 	
 	@PostConstruct
 	public void initialize() {
@@ -54,37 +59,53 @@ public class Initialize {
 		/** Feedback */
 		
 		/** Persist elements */
-		try {
-			userDao.persist(player1);
-			userDao.persist(player2);
-		} catch (NamingException e) {// ONE TRUE Exception handler
-			if (Desktop.isDesktopSupported()) {
-			    try {
-					Desktop.getDesktop().browse(new URI("https://stackoverflow.com/search?q=[js] + " + e.getMessage()));
-				} catch (IOException e1) {
-					System.out.println("Give up and go home!");
-				} catch (URISyntaxException e1) {
-					System.out.println("Give up and go home!");
-				} 
-			}
-			else {
-			System.out.println("Give up and go home!");
-			// e.printStackTrace();
-			}
-		} catch (JMSException e) {
-			if (Desktop.isDesktopSupported()) {
-			    try {
-					Desktop.getDesktop().browse(new URI("https://stackoverflow.com/search?q=[js] + " + e.getMessage()));
-				} catch (IOException e1) {
-					System.out.println("Give up and go home!");
-				} catch (URISyntaxException e1) {
-					System.out.println("Give up and go home!");
-				} 
-			}
-			else {
-			System.out.println("Give up and go home!");
-			// e.printStackTrace();
-			}
-		}
+		
+		em.persist(player1);
+		em.persist(player2);
+		
+		em.persist(bitcoinPick);
+		em.persist(velocipede);
+		
+		em.persist(auction1);
+		em.persist(auction2);
+		em.persist(auction3);
+		
+		em.persist(bid1);
+		em.persist(bid2);
+		
+		
+//		try {
+			
+//		} catch (NamingException e) {// ONE TRUE Exception handler
+//			if (Desktop.isDesktopSupported()) {
+//			    try {
+//					Desktop.getDesktop().browse(new URI("https://stackoverflow.com/search?q=[js] + " + e.getMessage()));
+//				} catch (IOException e1) {
+//					System.out.println("Give up and go home!");
+//				} catch (URISyntaxException e1) {
+//					System.out.println("Give up and go home!");
+//				} 
+//			}
+//			else {
+//			System.out.println("Give up and go home!");
+//			// e.printStackTrace();
+//			}
+//		}
+		
+//		catch (JMSException e) {
+//			if (Desktop.isDesktopSupported()) {
+//			    try {
+//					Desktop.getDesktop().browse(new URI("https://stackoverflow.com/search?q=[js] + " + e.getMessage()));
+//				} catch (IOException e1) {
+//					System.out.println("Give up and go home!");
+//				} catch (URISyntaxException e1) {
+//					System.out.println("Give up and go home!");
+//				} 
+//			}
+//			else {
+//			System.out.println("Give up and go home!");
+//			// e.printStackTrace();
+//			}
+//		}
 	}
 }

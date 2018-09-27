@@ -3,6 +3,8 @@ package entities;
 import java.util.ArrayList;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * Persistent class for the Product database table. Class defining the sales
@@ -10,6 +12,7 @@ import javax.persistence.*;
  */
 
 @Entity(name = "product")
+@XmlRootElement
 public class Product {
 
 	/** Variables */
@@ -42,6 +45,8 @@ public class Product {
 
 		this.auctions = new ArrayList<Auction>();
 	}
+	
+	
 	
 	/** Data services */
 	public Integer getId() {
@@ -83,7 +88,8 @@ public class Product {
 	public void setPicture(String picture) {
 		this.picture = picture;
 	}
-
+	
+	@XmlTransient
 	public User getUser() {
 		return user;
 	}
@@ -92,6 +98,7 @@ public class Product {
 		this.user = user;
 	}
 
+	@XmlTransient
 	public ArrayList<Auction> getAuctions() {
 		return auctions;
 	}

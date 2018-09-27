@@ -1,6 +1,7 @@
 package entities;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * Persistent class for the User database table. Class and system entity
@@ -37,6 +38,8 @@ public class Feedback {
 		this.sellerRating = sellerRating;
 		this.productRating = productRating;
 	}
+	
+	
 
 	/** Data services */
 	public Integer getId() {
@@ -47,6 +50,7 @@ public class Feedback {
 		this.id = id;
 	}
 
+	@XmlTransient
 	public Auction getAuction() {
 		return auction;
 	}
@@ -55,6 +59,7 @@ public class Feedback {
 		this.auction = auction;
 	}
 
+	@XmlTransient
 	public User getUser() {
 		return user;
 	}

@@ -1,95 +1,86 @@
 package rest;
 
-import javax.ejb.EJB;
+import java.util.List;
+
 import javax.ejb.Stateless;
-import javax.jms.JMSException;
-import javax.naming.NamingException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
-import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
-import ejb.UserDao;
 import entities.Auction;
+import entities.Bid;
+import entities.User;
 
 //To test rest operations use the url http://localhost:8080/AuctionApplication/rest/tweets
 
 @Path("/auctions")
 @Stateless
 public class Auctions {
-	
-	@EJB
-	UserDao userDao;
 
 	@PersistenceContext(unitName = "AuctionApplicationPU")
 	private EntityManager em;
 
 	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response auctions() {
-		Query query = em.createQuery("SELECT a from AUCTION a");
-		return Response.ok(query.getResultList()).build();
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
+	public List<Auction> getAuctions() {
+		Query query = em.createQuery("SELECT a from auction a");
+		return query.getResultList();
 	}
 
 	@GET
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	@Path("{id}")
-	public Response auction(@PathParam("id") String id) {
+	public Auction auction(@PathParam("id") String id) {
 		
 		int idInt = Integer.parseInt(id);
-		Auction auction = em.find(Auction.class, idInt);
-		
-		if (auction == null) {
-			return Response.status(404).build();
-		} else {
-			return Response.ok(auction).build();
-		}
-		
+		return em.find(Auction.class, idInt);
+
 	}
-	
+
 	@GET
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	@Path("{id}/bids")
-	public Response auctionBids(@PathParam("id") String id) {
+	public List<Bid> auctionBids(@PathParam("id") String id) {
 		
 		int idInt = Integer.parseInt(id);
 		Auction auction = em.find(Auction.class, idInt);
-		
-		if (auction == null) {
-			return Response.status(404).build();
-		} else {
-			return Response.ok(auction.getBids()).build();
-		}
+	
+		return auction.getBids();
 		
 	}
 	
-//	@POST
-//	@Consumes("application/x-www-form-urlencoded")
-//	public Response createUser(
-//			@FormParam("email") String email,
-//			@FormParam("name") String name,
-//			@FormParam("phone") String phone
-//			) {
-//		
-//		User user = new User(email, name, phone);
-//		
-//		try {
-//			userDao.persist(user);
-//			return Response.ok(user.getId()).build();
-//			
-//		} catch (NamingException | JMSException e) {
-//			e.printStackTrace();
-//			return Response.serverError().build();
-//		}
-//		
-//	}
+
+	@POST
+	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
+	@Consumes("application/x-www-form-urlencoded")
+	@Path("{id}/bids")
+	public Bid createUser(
+			@PathParam("id") String id,
+			@FormParam("userId") String userIdString,
+			@FormParam("amount") String amountString
+			) {
+		
+		int auctionId = Integer.parseInt(id);
+		Auction auction = em.find(Auction.class, auctionId);
+		
+		int userId = Integer.parseInt(userIdString);
+		User user = em.find(User.class, userId);
+		
+		double amount = Double.parseDouble(amountString);
+		
+		Bid bid = new Bid(auction, user, amount);
+		
+		em.persist(bid);
+		
+		return bid;
+		
+	}
 }
