@@ -30,13 +30,13 @@ public class RestService {
 	@EJB
 	UserDao userDao;
 
-	@PersistenceContext(unitName = "DAT250AuctionApplication")
+	@PersistenceContext(unitName = "AuctionApplicationPU")
 	private EntityManager em;
 
 	@GET
 	@Produces(MediaType.APPLICATION_XML)
 	public Response getUsers() {
-		Query query = em.createQuery("SELECT u from User u");
+		Query query = em.createQuery("SELECT u from \"USER\" u");
 		return Response.ok(query.getResultList()).build();
 	}
 

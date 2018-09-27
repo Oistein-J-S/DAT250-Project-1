@@ -9,7 +9,7 @@ import javax.persistence.*;
  * item system entity.
  */
 
-@Entity
+@Entity(name = "product")
 public class Product {
 
 	@Id
@@ -22,6 +22,7 @@ public class Product {
 	private String picture;
 
 	@ManyToOne
+	@JoinColumn(name = "USER_ID")
 	private User user;
 
 	@OneToMany(mappedBy = "product")

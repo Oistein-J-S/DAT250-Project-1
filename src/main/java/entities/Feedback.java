@@ -7,7 +7,7 @@ import javax.persistence.*;
  * defining the act of making a review on a sold item.
  */
 
-@Entity
+@Entity(name = "feedback")
 public class Feedback {
 
 	@Id
@@ -18,7 +18,7 @@ public class Feedback {
 	private Auction auction;
 	
 	@OneToOne
-	@JoinColumn(name = "user")
+	@JoinColumn(name = "USER_ID")
 	private User user;
 	
 	private String text;

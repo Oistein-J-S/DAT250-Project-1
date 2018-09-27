@@ -7,7 +7,7 @@ import javax.persistence.*;
  * defining the act of selling a product.
  */
 
-@Entity
+@Entity(name = "auction")
 public class Auction {
 
 	@Id
@@ -18,7 +18,7 @@ public class Auction {
 	private Product product;
 	
 	
-	@OneToOne(mappedBy="auction")
+	@OneToOne
 	private Bid currentBid;
 	
 	@OneToOne

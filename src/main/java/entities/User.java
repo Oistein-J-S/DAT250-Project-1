@@ -9,7 +9,7 @@ import javax.persistence.*;
  * user entity.
  */
 
-@Entity
+@Entity(name = "\"USER\"")
 public class User {
 
 	@Id

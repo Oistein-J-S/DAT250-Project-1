@@ -7,18 +7,18 @@ import javax.persistence.*;
  * defining the act of placing a bid on an item for sale.
  */
 
-@Entity
+@Entity(name = "bid")
 public class Bid {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
-	@OneToOne
-	@JoinColumn(name = "auction")
+	@OneToOne(mappedBy="currentBid")
 	private Auction auction;
 	
 	@ManyToOne
+	@JoinColumn(name = "USER_ID")
 	private User user;
 	
 	

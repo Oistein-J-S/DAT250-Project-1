@@ -21,7 +21,7 @@ import entities.User;
 public class UserDao {
 	
     // Injected database connection:
-	@PersistenceContext(unitName="DAT250AuctionApplication")
+	@PersistenceContext(unitName="AuctionApplicationPU")
     private EntityManager em;
 	
 	
