@@ -19,7 +19,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import ejb.UserDao;
-import entities.User;
+import entities.Auction;
 
 //To test rest operations use the url http://localhost:8080/AuctionApplication/rest/tweets
 
@@ -34,44 +34,62 @@ public class Auctions {
 	private EntityManager em;
 
 	@GET
-	@Produces(MediaType.APPLICATION_XML)
-	public Response getUsers() {
-		Query query = em.createQuery("SELECT u from \"USER\" u");
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response auctions() {
+		Query query = em.createQuery("SELECT a from AUCTION a");
 		return Response.ok(query.getResultList()).build();
 	}
 
 	@GET
+	@Produces(MediaType.APPLICATION_JSON)
 	@Path("{id}")
-	public Response getAuction(@PathParam("id") String id) {
+	public Response auction(@PathParam("id") String id) {
 		
 		int idInt = Integer.parseInt(id);
-		User user = em.find(User.class, idInt);
+		Auction auction = em.find(Auction.class, idInt);
 		
-		if (user == null) {
-			throw new NotFoundException();
+		if (auction == null) {
+			return Response.status(404).build();
+		} else {
+			return Response.ok(auction).build();
 		}
 		
-		return Response.ok(user).build();
 	}
 	
-	@POST
-	@Consumes("application/x-www-form-urlencoded")
-	public Response createUser(
-			@FormParam("email") String email,
-			@FormParam("name") String name,
-			@FormParam("phone") String phone
-			) {
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("{id}/bids")
+	public Response auctionBids(@PathParam("id") String id) {
 		
-		User user = new User(email, name, phone);
+		int idInt = Integer.parseInt(id);
+		Auction auction = em.find(Auction.class, idInt);
 		
-		try {
-			userDao.persist(user);
-			return Response.ok(user.getId()).build();
-			
-		} catch (NamingException | JMSException e) {
-			e.printStackTrace();
-			return Response.serverError().build();
+		if (auction == null) {
+			return Response.status(404).build();
+		} else {
+			return Response.ok(auction.getBids()).build();
 		}
 		
 	}
+	
+//	@POST
+//	@Consumes("application/x-www-form-urlencoded")
+//	public Response createUser(
+//			@FormParam("email") String email,
+//			@FormParam("name") String name,
+//			@FormParam("phone") String phone
+//			) {
+//		
+//		User user = new User(email, name, phone);
+//		
+//		try {
+//			userDao.persist(user);
+//			return Response.ok(user.getId()).build();
+//			
+//		} catch (NamingException | JMSException e) {
+//			e.printStackTrace();
+//			return Response.serverError().build();
+//		}
+//		
+//	}
 }

@@ -14,7 +14,8 @@ public class Bid {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
-	@OneToOne(mappedBy="currentBid")
+	@ManyToOne
+	@JoinColumn(name = "AUCTION_ID")
 	private Auction auction;
 	
 	@ManyToOne

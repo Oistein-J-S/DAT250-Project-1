@@ -1,5 +1,8 @@
 package entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 
 /**
@@ -19,8 +22,8 @@ public class Auction {
 	private Product product;
 	
 	
-	@OneToOne
-	private Bid currentBid;
+	@OneToMany(mappedBy = "auction")
+	private List<Bid> bids;
 	
 	@OneToOne
 	private Feedback feedback;
@@ -39,6 +42,8 @@ public class Auction {
 		this.startingPrice = startingPrice;
 		this.buyoutPrice = buyoutPrice;
 		this.length = length;
+		
+		this.bids = new ArrayList<>();
 	}
 
 	public Auction(Product product, double startingPrice, double buyoutPrice, long startTime, long length) {
@@ -47,6 +52,8 @@ public class Auction {
 		this.buyoutPrice = buyoutPrice;
 		this.startTime = startTime;
 		this.length = length;
+		
+		this.bids = new ArrayList<>();
 	}
 
 	/** Data services */
@@ -58,14 +65,6 @@ public class Auction {
 	public boolean isfinished() {
 		// TODO create method body
 		return false;
-	};
-	
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public Product getProduct() {
@@ -76,12 +75,12 @@ public class Auction {
 		this.product = product;
 	}
 
-	public Bid getCurrentBid() {
-		return currentBid;
+	public List<Bid> getBids() {
+		return bids;
 	}
 
-	public void setCurrentBid(Bid currentBid) {
-		this.currentBid = currentBid;
+	public void setBids(List<Bid> bids) {
+		this.bids = bids;
 	}
 
 	public Feedback getFeedback() {
@@ -92,36 +91,36 @@ public class Auction {
 		this.feedback = feedback;
 	}
 
-	public double getStartingPrice() {
+	public Double getStartingPrice() {
 		return startingPrice;
 	}
 
-	public void setStartingPrice(double startingPrice) {
+	public void setStartingPrice(Double startingPrice) {
 		this.startingPrice = startingPrice;
 	}
 
-	public double getBuyoutPrice() {
+	public Double getBuyoutPrice() {
 		return buyoutPrice;
 	}
 
-	public void setBuyoutPrice(double buyoutPrice) {
+	public void setBuyoutPrice(Double buyoutPrice) {
 		this.buyoutPrice = buyoutPrice;
 	}
 
-	public long getStartTime() {
+	public Long getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(long startTime) {
+	public void setStartTime(Long startTime) {
 		this.startTime = startTime;
 	}
 
-	public long getLength() {
+	public Long getLength() {
 		return length;
 	}
 
-	public void setLength(long length) {
+	public void setLength(Long length) {
 		this.length = length;
-	}
-
+	};
+	
 }
