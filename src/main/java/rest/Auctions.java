@@ -23,9 +23,9 @@ import entities.User;
 
 //To test rest operations use the url http://localhost:8080/AuctionApplication/rest/tweets
 
-@Path("/user")
+@Path("/auctions")
 @Stateless
-public class RestService {
+public class Auctions {
 	
 	@EJB
 	UserDao userDao;
@@ -42,7 +42,7 @@ public class RestService {
 
 	@GET
 	@Path("{id}")
-	public Response getUser(@PathParam("id") String id) {
+	public Response getAuction(@PathParam("id") String id) {
 		
 		int idInt = Integer.parseInt(id);
 		User user = em.find(User.class, idInt);
