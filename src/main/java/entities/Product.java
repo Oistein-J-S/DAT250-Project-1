@@ -12,6 +12,7 @@ import javax.persistence.*;
 @Entity(name = "product")
 public class Product {
 
+	/** Variables */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
@@ -28,7 +29,7 @@ public class Product {
 	@OneToMany(mappedBy = "product")
 	private ArrayList<Auction> auctions;
 
-	/** Constructor */
+	/** Constructors */
 	public Product() {
 	}
 
@@ -41,7 +42,8 @@ public class Product {
 
 		this.auctions = new ArrayList<Auction>();
 	}
-
+	
+	/** Data services */
 	public Integer getId() {
 		return id;
 	}

@@ -11,7 +11,8 @@ import javax.persistence.*;
 
 @Entity(name = "\"USER\"")
 public class User {
-
+	
+	/** Variables */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
@@ -26,6 +27,7 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	private ArrayList<Bid> bids;
 
+	/** Constructors */
 	public User() {}
 
 	public User(String email, String name, String phone) {

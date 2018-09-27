@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Entity(name = "feedback")
 public class Feedback {
 
+	/** Variables */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
@@ -25,6 +26,7 @@ public class Feedback {
 	private Integer sellerRating;
 	private Integer productRating;
 
+	/** Constructors */
 	public Feedback() {}
 
 	public Feedback(Auction auction, User user, String text, int sellerRating, int productRating) {
@@ -36,6 +38,7 @@ public class Feedback {
 		this.productRating = productRating;
 	}
 
+	/** Data services */
 	public Integer getId() {
 		return id;
 	}
