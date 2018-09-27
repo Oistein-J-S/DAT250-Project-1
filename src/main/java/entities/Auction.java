@@ -1,6 +1,7 @@
 package entities;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -67,13 +68,25 @@ public class Auction {
 
 	/** Data services */
 	public boolean isPublished() {
-		// TODO create method body
-		return false;
+		Date now = new Date(); //Not thread safe! Unnecessary resource allocation?
+		if (startTime == null) { //No start time has been set
+			return false;
+		}else if (startTime > now.getTime()) { //If the start date is after (>) current date
+			return false;
+		} else { //The start date is in the past so it's published.
+			return true;
+		}
 	}
 
 	public boolean isfinished() {
-		// TODO create method body
-		return false;
+		Date now = new Date(); //Not thread safe! Unnecessary resource allocation?
+		if (startTime == null) { //No start time has been set, not started means not finished
+			return false;
+		}else if (startTime + length > now.getTime()) { //If the current time is less than start time plus running time
+			return false;
+		} else { //The auction has started and run for it's intended time
+			return true;
+		}
 	}
 	
 	public void setId(Integer id) {
